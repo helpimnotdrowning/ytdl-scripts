@@ -3,7 +3,7 @@ yt-dlp `
 --downloader-args "--continue --max-concurrent-downloads=16 --max-connection-per-server=16 --split=16 --min-split-size=5M" `
 --force-ipv4 `
 --keep-video `
---cookies-from-browser $(get-content ./__browser.txt) `
+--cookies-from-browser $(get-content "$PSScriptRoot/__browser.txt") `
 --ignore-errors `
 --no-continue `
 --no-overwrites `
@@ -17,7 +17,7 @@ yt-dlp `
 --embed-subs `
 --get-comments `
 --check-formats `
---concurrent-fragments $(get-content ./__concurrent-fragments-media.txt) `
+--concurrent-fragments $(get-content "$PSScriptRoot/__concurrent-fragments-media.txt") `
 --output $(get-content ./__output-format.txt) `
 --throttled-rate 100K `
 $args 2>&1

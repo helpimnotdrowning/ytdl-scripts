@@ -8,15 +8,15 @@ yt-dlp `
 --no-continue `
 --no-overwrites `
 --no-write-info-json `
---cookies-from-browser $(get-content ./__browser.txt) `
+--cookies-from-browser $(get-content "$PSScriptRoot/__browser.txt") `
 --check-formats `
 --throttled-rate 100K `
 --retries infinite `
---concurrent-fragments $(get-content ./__concurrent-fragments-media.txt) `
+--concurrent-fragments $(get-content "$PSScriptRoot/__concurrent-fragments-media.txt") `
 --merge-output-format mkv `
 --remux-video mkv `
 --embed-chapters `
 --no-part `
 --sponsorblock-mark all,-poi_highlight,-filler `
---output $(get-content ./__output-format.txt) `
+--output $(get-content "$PSScriptRoot/__output-format.txt") `
 $args 2>&1

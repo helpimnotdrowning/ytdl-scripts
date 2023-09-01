@@ -10,6 +10,11 @@ If (($args[0] -match "^(http(s)?:\/\/)?.*\.?twitch\.tv\/") -and -not ($args[0] -
     exit
 }
 
+If ((-not (Test-Path $(get-content "$PSScriptRoot/__cookies_file_path.txt") -PathType Leaf))) {
+    Write-Warning "Watch out! The cookies.txt file specified in $PSScriptRoot/__cookies_file_path.txt doesn't exist!"
+    Write-Warning "Scripts `"(2) YouTube stream`" and `"(5) YouTube community posts`" will not capture paywalled or otherwise account-restricted content without this!"
+}
+
 Write-Host "What would you like to do with link $($args[0])? Choose [1->8]"
 Write-Host "($($PSStyle.Foreground.Yellow)1$($PSStyle.Reset)) $($PSStyle.Foreground.Yellow)STANDARD$($PSStyle.Reset) $($PSStyle.Foreground.BrightBlack)[standard-processed]$($PSStyle.Reset)"
 Write-Host "    - Video, metadata, subs for pretty much EVERYTHING"
@@ -31,13 +36,13 @@ Write-Host "    - Full metadata (info.json, description) and ALL comments presen
 $choice = Read-Host
 
 Switch ($choice) {
-    1 {./standard-processed $args}
-    2 {./stream-unprocessed $args}
-    3 {./twitch $args}
-    4 {./full $args}
-    5 {./community-posts $args}
-    6 {./_video-audio $args}
-    7 {./_subs-chat $args}
-    8 {./_info-json-comments $args}
+    1 {&"$PSScriptRoot/standard-processed" $args}
+    2 {&"$PSScriptRoot/stream-unprocessed" $args}
+    3 {&"$PSScriptRoot/twitch" $args}
+    4 {&"$PSScriptRoot/full" $args}
+    5 {&"$PSScriptRoot/community-posts" $args}
+    6 {&"$PSScriptRoot/_video-audio" $args}
+    7 {&"$PSScriptRoot/_subs-chat" $args}
+    8 {&"$PSScriptRoot/_info-json-comments" $args}
     default {Write-Host "Invalid choice, choose a number between 1 and 8!"; exit}
 }

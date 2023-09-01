@@ -10,13 +10,13 @@ yt-dlp `
 --write-description `
 --write-info-json `
 --write-comments `
---cookies-from-browser $(get-content ./__browser.txt) `
+--cookies-from-browser $(get-content "$PSScriptRoot/__browser.txt") `
 --check-formats `
 --throttled-rate 100K `
 --retries infinite `
---concurrent-fragments $(get-content ./__concurrent-fragments-data.txt) `
+--concurrent-fragments $(get-content "$PSScriptRoot/__concurrent-fragments-data.txt") `
 --no-part `
 --sponsorblock-mark all,-poi_highlight,-filler `
 --skip-download `
---output $(get-content ./__output-format.txt) `
+--output $(get-content "$PSScriptRoot/__output-format.txt") `
 $args 2>&1
