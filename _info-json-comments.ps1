@@ -1,0 +1,22 @@
+yt-dlp `
+--format "best" `
+--force-ipv4 `
+--sleep-requests .25 `
+--sleep-interval 5 `
+--max-sleep-interval 15 `
+--ignore-errors `
+--no-continue `
+--no-overwrites `
+--write-description `
+--write-info-json `
+--write-comments `
+--cookies-from-browser $(get-content ./__browser.txt) `
+--check-formats `
+--throttled-rate 100K `
+--retries infinite `
+--concurrent-fragments $(get-content ./__concurrent-fragments-data.txt) `
+--no-part `
+--sponsorblock-mark all,-poi_highlight,-filler `
+--skip-download `
+--output $(get-content ./__output-format.txt) `
+$args 2>&1

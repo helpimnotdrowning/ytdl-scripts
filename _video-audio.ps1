@@ -1,0 +1,22 @@
+yt-dlp `
+--format "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/bestvideo+bestaudio/best" `
+--force-ipv4 `
+--sleep-requests 1 `
+--sleep-interval 5 `
+--max-sleep-interval 15 `
+--ignore-errors `
+--no-continue `
+--no-overwrites `
+--no-write-info-json `
+--cookies-from-browser $(get-content ./__browser.txt) `
+--check-formats `
+--throttled-rate 100K `
+--retries infinite `
+--concurrent-fragments $(get-content ./__concurrent-fragments-media.txt) `
+--merge-output-format mkv `
+--remux-video mkv `
+--embed-chapters `
+--no-part `
+--sponsorblock-mark all,-poi_highlight,-filler `
+--output $(get-content ./__output-format.txt) `
+$args 2>&1
