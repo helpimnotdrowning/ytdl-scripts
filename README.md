@@ -27,3 +27,7 @@ Use `dl.ps1` for an """interactive""" picker that shows all your options, along 
 `__cookies_file_path.txt`
 - Path to your `cookies.txt` file
 - This is only used for `(2) YouTube stream` and `(5) YouTube community posts`, since don't use yt-dlp and can't extract cookies from the browser automatically.
+
+`__always_use_cookies_file.txt`
+- Whether you want to *always* use your cookies file, as opposed to extracting it automatically whenever possible.
+- Must be "true" or "false" (the file only actually checks if it's "true", but still please use "false" for false for consistency)
