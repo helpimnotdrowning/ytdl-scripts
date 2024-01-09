@@ -1,0 +1,37 @@
+{
+    // DO NOT USE WINDOWS BACKSLASHES ( \ ) IN THIS FILE, ALWAYS USE NORMAL SLASHES ( / )
+    
+    // [String] Generic base path for downloaders. MUST end with a slash!
+    //OutputBase: "/mnt/W/ytdl/",
+    OutputBase: "./",
+    // [String] File name format for scripts using yt-dlp
+    YTDLPOutputFormat: "%(uploader)s/$(upload_date)s - $(title)s/%(title)s [$(id)s] f%(format_id)s.$(ext)s",
+    // [String] File name format for scripts using ytarchive
+    YTARCHIVEOutputFormat: "%(channel)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] LIVE",
+    
+    // [Bool: true | false] Whether to "always" use a cookies file instead of "whenever possible"
+    // (this settinh only affects scripts using yt-dlp, ytarchive cannot read cookies from the browser and will always
+    // use the cookies file)
+    AlwaysUseCookiesFile: true,
+    // [String] Cookie file path (At minimum required for ytarchive scripts when AlwaysUseCookiesFile = false,
+    // otherwise this is is always needed.)
+    //CookiesFilePath: "/mnt/W/ytdl/cookies.txt",
+    CookiesFilePath: "C:/Users/helpi/Desktop/cookies.txt",
+    // [String: ANY OF brave, chrome, chromium, edge, firefox, opera, safari, vivaldi] Browser for yt-dlp to
+    // auto-extract cookies from when AlwaysUseCookiesFile = true
+    CookiesBrowser: "firefox",
+    
+    // NOTE ABOUT CONCURRENT FRAGMENTS:
+    // I recommend keeping the defaults set here, I have tested these thouroughly and have determined
+    // that this is about the upper limit before YouTube begins throttling your connection or temp. blocking your IP.
+    // I am, however, in the US with a reasonably good connection, so if you find your download speed lacking or are
+    // being throttled ("WARNING: The download speed is below throttle limit" or "Got error: HTTP Error 403: Forbidden")
+    // then feel free to play around with these values.
+    
+	// [Int: DEFAULT 10] Amount of simultanious connections allowed for video/audio files
+    MediaConcurrentFragments: 10
+	
+    // [Int: DEFAULT 4] Amount of simultanious connections allowed for data (subs, thumbnails, comments, ess.
+    // non-video/audio) files
+    DataConcurrentFragments: 4,
+}

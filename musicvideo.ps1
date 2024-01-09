@@ -6,7 +6,7 @@ $Command = @(
     '--force-ipv4',
     '--sleep-requests 1',
     '--sleep-interval 5',
-    '--max-sleep-interval 15',
+    '--max-sleep-interval 6',
     '--ignore-errors',
     '--no-continue',
     '--no-overwrites',
@@ -22,13 +22,17 @@ $Command = @(
     '--throttled-rate 100K',
     '--retries infinite',
     '--concurrent-fragments', "$($Config.MediaConcurrentFragments)",
-    '--merge-output-format mkv',
-    '--remux-video mkv',
     '--embed-chapters',
     '--no-part',
+	'--embed-metadata',
+	'--parse-metadata', '"%(upload_date>%Y-%m-%d)s:%(meta_date)s"', # format date as yyyy-MM-dd
+	'--parse-metadata', '":(?P<meta_synopsis>)"', # don't store description in synopsis
+	'--parse-metadata', '":(?P<meta_description>)"', # don't store description in description
+	'--parse-metadata', '"description:(?s)(?P<meta_comment>.+)"', # store description in comment
+	'--replace-in-metadata', '"meta_comment" "\n" "\r\n"', # replace \n with \r\n for display compat. with mp3tag (would otherwise render as one line)
     '--sponsorblock-mark', 'all,-poi_highlight,-filler',
-    '--output', "`"$($Config.OutputBase)/$($Config.YTDLPOutputFormat)`"",
-    $(& "$PSScriptRoot/Repair-ArgumentsToString" $args),
+    '--output', '"musicvideo/[%(upload_date>%Y-%m-%d)s] [yt-%(id)s] %(title)s - %(uploader)s.%(ext)s"',
+    $(& "$PSScriptRoot/Repair-ArgumentsToString" @args),
     "2>&1"
 ) -join ' '
 

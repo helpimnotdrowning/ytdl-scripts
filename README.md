@@ -2,32 +2,46 @@ A collection of scripts for archival purposes.
 
 DEPENDENCIES: [`yt-dlp`](https://github.com/yt-dlp/yt-dlp), [`ytarchive`](https://github.com/Kethsar/ytarchive), [`youtube-community-tab`](https://github.com/bot-jonas/youtube-community-tab), `ffmpeg`
 
-To change most-needed settings, edit files beginning with "__" (double underscores)
+Edit the `Config.json5` file to change settings.
 
-Use `dl.ps1` for an """interactive""" picker that shows all your options, along with auto-fallthrough for `youtube.com/live` streams and (non-clip) `twitch.tv` streams/VODs. It requires at least one argument, being the video link. Any other arguments are passed directly onto the downloader script.
+Use `PS> dl.ps1 <link>` to interactively select a download script with descriptions, with auto-fallthrough for `youtube.com/live` streams and (non-clip) `twitch.tv` streams/VODs to their respective downloaders.
 
-`__browser.txt`
-- Your browser to extract auth cookies from
-- One of `brave, chrome, chromium, edge, firefox, opera, safari, vivaldi`
+# Settings
 
-`__concurrent-fragments-(data,media).txt`
-- Fragments to download concurrently (download threading)
-- I've found that using more threads for data has little effect, where 10 threads is about the limit for videos before being limited by YouTube
-- Can be any integer, but try to keep data threads low. `403 Forbidden` in output means you're probably being limited and need to turn these down
+## Config.OutputBase
+* **[String]** Generic base path for downloaders. MUST end with a slash!
+* Ex 
+  * "/mnt/W/ytdl/"
+  * "./"
+  * "C:/Users/User/Download/"
 
-`__output-base.txt`
-- Base path to download to
-- Use only normal slashes "/", must end with a slash
-- Use "./" to always write to the working directory.
+## Config.YTDLPOutputFormat, Config.YTARCHIVEOutputFormat
+* **[String]** File name format for scripts using yt-dlp or ytarchive
+* They both have different output format labels and can't share it between eachother. Recommended to keep them in sync
+* Ex
+  * (yt-dlp) "%(uploader)s/$(upload_date)s - $(title)s/%(title)s [$(id)s] f%(format_id)s.$(ext)s"
+  * (ytarchive) "%(channel)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] LIVE"
 
-`__output-format.txt`
-- Output filename format template for everything EXCEPT `(2) YouTube stream` and `(5) YouTube community posts`, as these don't use yt-dlp
-- Use [this guide](https://github.com/yt-dlp/yt-dlp#output-template ) to write templates.
+## Config.AlwaysUseCookiesFile
+* **[Bool: true|false]** Whether to "always" use a cookies file instead of "whenever possible"
+* This setting only affects scripts using yt-dlp, ytarchive cannot read cookies from the browser and will always use the cookies file
 
-`__cookies_file_path.txt`
-- Path to your `cookies.txt` file
-- This is only used for `(2) YouTube stream` and `(5) YouTube community posts`, since don't use yt-dlp and can't extract cookies from the browser automatically.
+## Config.CookiesFilePath
+* **[String]** Cookie file path.
+* At minimum required for ytarchive scripts when AlwaysUseCookiesFile = false, otherwise this is is always needed.
+* Ex
+  * "C:/Users/User/cookies.txt"
+  * "/mnt/W/ytdl/cookies.txt"
 
-`__always_use_cookies_file.txt`
-- Whether you want to *always* use your cookies file, as opposed to extracting it automatically whenever possible.
-- Must be "true" or "false" (the file only actually checks if it's "true", but still please use "false" for false for consistency)
+## Config.CookiesBrowser
+* **[String: brave | chrome | chromium | edge | firefox | opera | safari | vivaldi]** Browser for yt-dlp to auto-extract cookies from when AlwaysUseCookiesFile = true
+
+## Config.MediaConcurrentFragments, Config.DataConcurrentFragments
+**NOTE ABOUT CONCURRENT FRAGMENTS:**
+I recommend keeping the defaults pre-set, I have tested these thouroughly and have determined
+that this is about the upper limit before YouTube begins throttling your connection or temp. blocking your IP.
+I am, however, in the US with a reasonably good connection, so if you find your download speed lacking or are
+being throttled (`WARNING: The download speed is below throttle limit` or `Got error: HTTP Error 403: Forbidden`)
+then feel free to play around with these values.
+
+* **[Int]** Amount of simultanious connections allowed for video/audio (media) and subs, thumbnails, comments, not-video/audio (data)

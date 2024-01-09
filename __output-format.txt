@@ -1,1 +1,0 @@
-%(uploader)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] f%(format_id)s.%(ext)s
