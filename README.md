@@ -11,16 +11,16 @@ Use `PS> dl.ps1 <link>` to interactively select a download script with descripti
 ## Config.OutputBase
 * **[String]** Generic base path for downloaders. MUST end with a slash!
 * Ex 
-  * "/mnt/W/ytdl/"
-  * "./"
-  * "C:/Users/User/Download/"
+  * `"/mnt/W/ytdl/"`
+  * `"./"`
+  * `"C:/Users/User/Download/"`
 
 ## Config.YTDLPOutputFormat, Config.YTARCHIVEOutputFormat
 * **[String]** File name format for scripts using yt-dlp or ytarchive
 * They both have different output format labels and can't share it between eachother. Recommended to keep them in sync
 * Ex
-  * (yt-dlp) "%(uploader)s/$(upload_date)s - $(title)s/%(title)s [$(id)s] f%(format_id)s.$(ext)s"
-  * (ytarchive) "%(channel)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] LIVE"
+  * (yt-dlp) `"%(uploader)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] f%(format_id)s.%(ext)s"`
+  * (ytarchive) `"%(channel)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] LIVE"`
 
 ## Config.AlwaysUseCookiesFile
 * **[Bool: true|false]** Whether to "always" use a cookies file instead of "whenever possible"
@@ -30,11 +30,11 @@ Use `PS> dl.ps1 <link>` to interactively select a download script with descripti
 * **[String]** Cookie file path.
 * At minimum required for ytarchive scripts when AlwaysUseCookiesFile = false, otherwise this is is always needed.
 * Ex
-  * "C:/Users/User/cookies.txt"
-  * "/mnt/W/ytdl/cookies.txt"
+  * `"C:/Users/User/cookies.txt"`
+  * `"/mnt/W/ytdl/cookies.txt"`
 
 ## Config.CookiesBrowser
-* **[String: brave | chrome | chromium | edge | firefox | opera | safari | vivaldi]** Browser for yt-dlp to auto-extract cookies from when AlwaysUseCookiesFile = true
+* **[String: `brave` | `chrome` | `chromium` | `edge` | `firefox` | `opera` | `safari` | `vivaldi`]** Browser for yt-dlp to auto-extract cookies from when AlwaysUseCookiesFile = true
 
 ## Config.MediaConcurrentFragments, Config.DataConcurrentFragments
 **NOTE ABOUT CONCURRENT FRAGMENTS:**

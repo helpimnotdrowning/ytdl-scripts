@@ -5,7 +5,7 @@
     //OutputBase: "/mnt/W/ytdl/",
     OutputBase: "./",
     // [String] File name format for scripts using yt-dlp
-    YTDLPOutputFormat: "%(uploader)s/$(upload_date)s - $(title)s/%(title)s [$(id)s] f%(format_id)s.$(ext)s",
+    YTDLPOutputFormat: "%(uploader)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] f%(format_id)s.%(ext)s",
     // [String] File name format for scripts using ytarchive
     YTARCHIVEOutputFormat: "%(channel)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] LIVE",
     
