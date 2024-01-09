@@ -28,10 +28,10 @@
     // being throttled ("WARNING: The download speed is below throttle limit" or "Got error: HTTP Error 403: Forbidden")
     // then feel free to play around with these values.
     
-	// [Int: DEFAULT 10] Amount of simultanious connections allowed for video/audio files
-    MediaConcurrentFragments: 10
+    // [Int: DEFAULT 10] Amount of simultanious connections allowed for video/audio files
+    MediaConcurrentFragments: 10,
 	
     // [Int: DEFAULT 4] Amount of simultanious connections allowed for data (subs, thumbnails, comments, ess.
     // non-video/audio) files
-    DataConcurrentFragments: 4,
+    DataConcurrentFragments: 4
 }
