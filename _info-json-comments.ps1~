@@ -15,7 +15,6 @@ $Command = @(
 	
 	$Config.AlwaysUseCookiesFile ? ('--cookies', $Config.CookiesFilePath) : ('--cookies-from-browser', $Config.CookiesBrowser),
 	
-	'--write-thumbnail',
     '--check-formats',
     '--throttled-rate', '100K'
     '--retries', 'infinite'
