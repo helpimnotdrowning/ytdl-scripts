@@ -1,54 +1,18 @@
 {
-	// DO NOT USE WINDOWS BACKSLASHES ( \ ) IN THIS FILE, ALWAYS USE NORMAL SLASHES ( / )
+	// DO NOT USE WINDOWS BACKSLASHES ( \ ) IN THIS FILE
+	// ALWAYS USE NORMAL SLASHES ( / )
+
+	// This is the sample file! Copy this to Config.json5 and refer to the
+	// README before modify these settings.
 	
-	
-	// @param OutputBase [String] Base path for all downloads
 	"OutputBase": "/media/ytdl",
+	"YTDLPOutputFormat": "%(uploader)s/%(upload_date)s - %(title)s [%(id)s]/%(title)s [%(id)s] f%(format_id)s.%(ext)s",
 	
-	// @param YTDLPOutputFormat [String] File path template for yt-dlp downloads
-	"YTDLPOutputFormat": "%(uploader)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] f%(format_id)s.%(ext)s",
-	
-	// @param YTARCHIVEOutputFormat [String] File path template for ytarchive
-	// downloads
-	"YTARCHIVEOutputFormat": "%(channel)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] LIVE",
-	
-	
-	// @param AlwaysUseCookiesFile [Bool] Whether yt-dlp will "always" use the
-	// cookies file or merely "whenever possible". This only affects yt-dlp, as
-	// ytarchive cannot read browser cookies and will always use the cookies
-	// file anyways
 	"AlwaysUseCookiesFile": false,
-	
-	// @param CookiesFilePath [String] Path to the cookies file; only needed to
-	// access private or paywalled content that you have access to or bypass
-	// rate limits for "guest" accounts
 	"CookiesFilePath": "/media/ytdl/cookies.txt",
-	
-	// @param CookiesBrowser [String] Browser for yt-dlp to extract cookies
-	// from, has no effect for ytarchive. MUST be any of: brave, chrome,
-	// chromium, edge, firefox, opera, safari, vivaldi
-	// If you use a custom fork of any of the above browsers (ie Thorium,
-	// Mercury, Waterfox, etc), write the base browser name, then a colon, then
-	// the parent path of your (profiles) cookie file (cookies.sqlite, Cookies,
-	// etc)
-	// ex Mercury: "firefox:C:\Users\user\AppData\Roaming\mercury\Profiles\
-	// <your-profile>", where <your profile>/ has a cookies.sqlite file
 	"CookiesBrowser": "firefox",
 	
-	
-	// NOTE ABOUT CONCURRENT FRAGMENTS:
-	// I recommend keeping the defaults set here. They have been tested "enough"
-	// to find the "upper limit" before Youtube/Twitch starts throttling
-	//  your connection or temp. blocking your IP. If you do end up being
-	// throttled (lots of "WARNING: The download speed is below throttle
-	// limit" or "Got error: HTTP Error 403: Forbidden") or find your download
-	// speed lacking, feel free to play around with these values.
-	
-	// @param MediaConcurrentFragments [Int: 5] Amount of simultanious
-	// connections allowed for audio/video files
+	// Double-check README before changing these numbers!
 	"MediaConcurrentFragments": 5,
-	
-	// @param DataConcurrentFragments [Int: 4] Amount of simultanious
-	// connections allowed for data files: subtitles, thumbnails, comments, etc
 	"DataConcurrentFragments": 4
 }
