@@ -1,5 +1,7 @@
 $Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
 
+$CookieConfig = $Config.AlwaysUseCookiesFile ? @('--cookies', $Config.CookiesFilePath) : @('--cookies-from-browser', $Config.CookiesBrowser)
+
 $Command = @(
 	'--verbose',
 	'--format', "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/bestvideo+bestaudio/best",
@@ -10,10 +12,7 @@ $Command = @(
 	'--ignore-errors',
 	'--no-continue',
 	'--no-overwrites',
-	'--no-write-info-json' # THIS COMMA IS PURPOSFULLY MISSING!!
-	
-	$Config.AlwaysUseCookiesFile ? ('--cookies', $Config.CookiesFilePath) : ('--cookies-from-browser', $Config.CookiesBrowser),
-	
+	'--no-write-info-json',
 	'--check-formats',
 	'--throttled-rate', '100K',
 	'--retries', 'infinite',
@@ -27,8 +26,7 @@ $Command = @(
 	'--parse-metadata', 'description:(?s)(?P<meta_comment>.+)', # store description in comment
 	'--replace-in-metadata', '"meta_comment" "\n" "\r\n"', # replace \n with \r\n for display compat. with mp3tag (would otherwise render as one line)
 	'--sponsorblock-mark', 'all,-poi_highlight,-filler',
-	'--output', "$($Config.OutputBase)/musicvideo/[%(upload_date>%Y-%m-%d)s] [yt-%(id)s] %(title)s - %(uploader)s.%(ext)s"  # THIS COMMA IS PURPOSFULLY MISSING!!
-	$args
+	'--output', "$($Config.OutputBase)/musicvideo/[%(upload_date>%Y-%m-%d)s] [yt-%(id)s] %(title)s - %(uploader)s.%(ext)s"
 )
 
-yt-dlp @Command *>&1
+yt-dlp @CookieConfig @Command @args

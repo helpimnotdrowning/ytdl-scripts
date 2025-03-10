@@ -1,6 +1,9 @@
 $Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
 
+$CookieConfig = $Config.AlwaysUseCookiesFile ? @('--cookies', $Config.CookiesFilePath) : @('--cookies-from-browser', $Config.CookiesBrowser)
+
 $Command = @(
+	'--verbose',
     '--format', "b",
     '--force-ipv4',
     '--sleep-requests', '.25',
@@ -11,21 +14,16 @@ $Command = @(
     '--no-overwrites',
     '--write-description',
     '--write-info-json',
-    '--write-comments' # THIS COMMA IS PURPOSFULLY MISSING!!
-	
-	$Config.AlwaysUseCookiesFile ? ('--cookies', $Config.CookiesFilePath) : ('--cookies-from-browser', $Config.CookiesBrowser),
-	
-	'--write-thumbnail',
+    '--write-comments',
+    '--write-thumbnail',
     '--check-formats',
-    '--throttled-rate', '100K'
-    '--retries', 'infinite'
-    '--retries', 'infinite'
+    '--throttled-rate', '100K',
+    '--retries', 'infinite',
     '--concurrent-fragments', $Config.DataConcurrentFragments,
     '--no-part',
-    '--sponsorblock-mark', 'all,-poi_highlight,-filler'
+    '--sponsorblock-mark', 'all,-poi_highlight,-filler',
     '--skip-download',
-    '--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)" # THIS COMMA IS PURPOSFULLY MISSING!!
-    $args
+    '--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)"
 )
 
-yt-dlp @Command *>&1
+yt-dlp @CookieConfig @Command @args

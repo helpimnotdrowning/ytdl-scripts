@@ -1,19 +1,11 @@
 $Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
 
-
-if (-not Test-Path )
-$CookiePath = & "$PSScriptRoot\Get-BrowserCookies.ps1" -Browser $Config.CookiesBrowser -BasePath $Config.CookiesFilePath
-
-if ($CookiePath -eq "") {
-	
-}
+Write-Warning "Dumping browser cookies to $($Config.CookiesFilePath), ignore the upcoming error message from yt-dlp..."
+yt-dlp --cookies-from-browser $Config.CookiesBrowser --cookies $Config.CookiesFilePath
 
 $Command = @(
-	'--cookies', $CookiePath,
-	'--dates' # THIS COMMA IS PURPOSFULLY MISSING!!
-	$args
+	'--cookies', $Config.CookiesFilePath,
+	'--dates'
 )
 
-~/youtube-community-tab/ytct.py @Command *>&1
-
-# TODO: Conditionally include --cookies flag depending on if cookies file exists.
+~/youtube-community-tab/ytct.py @Command @args

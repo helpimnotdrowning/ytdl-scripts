@@ -2,8 +2,8 @@ param (
 	[Parameter(Mandatory)]
 	[String] $URL,
 	
-	[String] $ExtraArgs,
-	
+	[String[]] $ExtraArgs,
+
 	[Int] $Choice
 )
 
@@ -58,14 +58,14 @@ $Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
 # Auto-detect YouTube live stream
 #if ($args[0] -match "^(http(s)?:\/\/)?.*\.?youtube\.com\/live\/") {
 if ($URL -like "*youtube.com/live/*") {
-	./stream-unprocessed $URL $ExtraArgs
+	./stream-unprocessed $URL @ExtraArgs
 	exit
 }
 
 # Auto-detect Twitch links EXCEPT for clips
 #if (($args[0] -match "^(http(s)?:\/\/)?.*\.?twitch\.tv\/") -and -not ($args[0] -match "^(http(s)?:\/\/)?clips\.?twitch\.tv\/")) {
 if (($URL -like "*twitch.tv*") -and ($URL -notlike "*clips.twitch.tv/*")) {
-	./twitch.ps1 $URL $ExtraArgs
+	./twitch.ps1 $URL @ExtraArgs
 	exit
 }
 
@@ -76,7 +76,7 @@ if (($URL -like "*twitch.tv*") -and ($URL -notlike "*clips.twitch.tv/*")) {
 #}
 
 Write-Warning "URL: $URL"
-Write-Warning "EXTRA ARGS: $ExtraArgs"
+Write-Warning "EXTRA ARGS: @ExtraArgs"
 
 
 # choice param is optional, if not used (-eq 0), interactively pick
@@ -135,14 +135,14 @@ if ($Choice -eq 0) {
 }
 
 switch ($Choice) {
-	1 { &"$PSScriptRoot/standard-processed" $URL $ExtraArgs }
-	2 { &"$PSScriptRoot/stream-unprocessed" $URL $ExtraArgs }
-	3 { &"$PSScriptRoot/twitch" $URL $ExtraArgs }
-	4 { &"$PSScriptRoot/full" $URL $ExtraArgs }
-	5 { &"$PSScriptRoot/community-posts" $URL $ExtraArgs }
-	6 { &"$PSScriptRoot/_video-audio" $URL $ExtraArgs }
-	7 { &"$PSScriptRoot/_subs-chat" $URL $ExtraArgs }
-	8 { &"$PSScriptRoot/_info-json-comments" $URL $ExtraArgs }
-	9 { &"$PSScriptRoot/musicvideo" $URL $ExtraArgs }
+	1 { &"$PSScriptRoot/standard-processed" $URL @ExtraArgs }
+	2 { &"$PSScriptRoot/stream-unprocessed" $URL @ExtraArgs }
+	3 { &"$PSScriptRoot/twitch" $URL @ExtraArgs }
+	4 { &"$PSScriptRoot/full" $URL @ExtraArgs }
+	5 { &"$PSScriptRoot/community-posts" $URL @ExtraArgs }
+	6 { &"$PSScriptRoot/_video-audio" $URL @ExtraArgs }
+	7 { &"$PSScriptRoot/_subs-chat" $URL @ExtraArgs }
+	8 { &"$PSScriptRoot/_info-json-comments" $URL @ExtraArgs }
+	9 { &"$PSScriptRoot/musicvideo" $URL @ExtraArgs }
 	default {Write-Error "Invalid choice, must be within 1-9, wrote `"$Choice`""; exit}
 }

@@ -1,8 +1,10 @@
 $Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
 
+$CookieConfig = $Config.AlwaysUseCookiesFile ? @('--cookies', $Config.CookiesFilePath) : @('--cookies-from-browser', $Config.CookiesBrowser)
+
 $Command = @(
-	'--verbose',
-    '--format', "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/bestvideo+bestaudio/best"
+    '--verbose',
+    '--format', "bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/bestvideo+bestaudio/best",
     '--force-ipv4',
     '--sleep-requests', '1',
     '--sleep-interval', '5',
@@ -10,10 +12,7 @@ $Command = @(
     '--ignore-errors',
     '--no-continue',
     '--no-overwrites',
-    '--no-write-info-json' # THIS COMMA IS PURPOSFULLY MISSING!!
-	
-	$Config.AlwaysUseCookiesFile ? ('--cookies', $Config.CookiesFilePath) : ('--cookies-from-browser', $Config.CookiesBrowser),
-	
+    '--no-write-info-json',
     '--check-formats',
     '--throttled-rate', '100K',
     '--retries', 'infinite',
@@ -23,8 +22,7 @@ $Command = @(
     '--embed-chapters',
     '--no-part',
     '--sponsorblock-mark', 'all,-poi_highlight,-filler',
-    '--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)" # THIS COMMA IS PURPOSFULLY MISSING!!
-    $args
+    '--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)"
 )
 
-yt-dlp @Command *>&1
+yt-dlp @CookieConfig @Command @args
