@@ -30,7 +30,7 @@ Use `dl.ps1 <link>` to interactively select a download script with descriptions,
   * `"/mnt/W/ytdl/cookies.txt"`
 
 ## Config.CookiesBrowser
-* **[String: `chrome` | `firefox` | ...]** Browser for yt-dlp to auto-extract cookies from when AlwaysUseCookiesFile = true
+* **[String: `chrome` | `firefox` | ...]** Browser for yt-dlp to auto-extract cookies from when `AlwaysUseCookiesFile` is false
 * See the [yt-dlp README#Filesystem Options](https://github.com/yt-dlp/yt-dlp/blob/master/README.md#filesystem-options) for supported browsers 
 
 ## Config.MediaConcurrentFragments, Config.DataConcurrentFragments
