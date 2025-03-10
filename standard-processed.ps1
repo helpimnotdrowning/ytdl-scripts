@@ -27,4 +27,4 @@ $Command = @(
 	'--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)" # THIS COMMA IS PURPOSFULLY MISSING!!
 )
 
-yt-dlp @CookieConfig @Command @args
+yt-dlp @CookieConfig @Command @args *>&1

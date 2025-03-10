@@ -19,4 +19,4 @@ $Command = @(
     '--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)"
 )
 
-yt-dlp @CookieConfig @Command @args
+yt-dlp @CookieConfig @Command @args *>&1

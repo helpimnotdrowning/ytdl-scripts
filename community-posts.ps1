@@ -8,4 +8,4 @@ $Command = @(
 	'--dates'
 )
 
-~/youtube-community-tab/ytct.py @Command @args
+~/youtube-community-tab/ytct.py @Command @args *>&1

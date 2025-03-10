@@ -27,4 +27,4 @@ $Command = @(
     '--throttled-rate', '100K'
 )
 
-yt-dlp @CookieConfig @Command @args
+yt-dlp @CookieConfig @Command @args *>&1

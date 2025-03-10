@@ -29,4 +29,4 @@ $Command = @(
 	'--output', "$($Config.OutputBase)/musicvideo/[%(upload_date>%Y-%m-%d)s] [yt-%(id)s] %(title)s - %(uploader)s.%(ext)s"
 )
 
-yt-dlp @CookieConfig @Command @args
+yt-dlp @CookieConfig @Command @args *>&1
