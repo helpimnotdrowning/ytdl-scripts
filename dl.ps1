@@ -89,8 +89,8 @@ if ($Choice -eq 0) {
 		),
 		@(
 			"YouTube Stream",
-			"stream-unprocessed",
-			"Future or in-progress; video only, metadata if not privated"
+			"stream",
+			"Standard, optimized for YouTube streams"
 		),
 		@(
 			"Twitch Stream",
@@ -136,7 +136,7 @@ if ($Choice -eq 0) {
 
 switch ($Choice) {
 	1 { &"$PSScriptRoot/standard-processed" $URL @ExtraArgs }
-	2 { &"$PSScriptRoot/stream-unprocessed" $URL @ExtraArgs }
+	2 { &"$PSScriptRoot/stream" $URL @ExtraArgs }
 	3 { &"$PSScriptRoot/twitch" $URL @ExtraArgs }
 	4 { &"$PSScriptRoot/full" $URL @ExtraArgs }
 	5 { &"$PSScriptRoot/community-posts" $URL @ExtraArgs }
