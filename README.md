@@ -1,10 +1,10 @@
 A collection of scripts for archival purposes.
 
-DEPENDENCIES: [`yt-dlp`](https://github.com/yt-dlp/yt-dlp), [`ytarchive`](https://github.com/Kethsar/ytarchive), [`youtube-community-tab`](https://github.com/bot-jonas/youtube-community-tab), `ffmpeg`
+DEPENDENCIES: [`yt-dlp`](https://github.com/yt-dlp/yt-dlp), [`youtube-community-tab`](https://github.com/bot-jonas/youtube-community-tab), `ffmpeg`
 
-Edit the `Config.json5` file to change settings.
+Copy the provided `Config.exp.json5` file to `Config.json5` to create your settings.
 
-Use `PS> dl.ps1 <link>` to interactively select a download script with descriptions, with auto-fallthrough for `youtube.com/live` streams and (non-clip) `twitch.tv` streams/VODs to their respective downloaders.
+Use `dl.ps1 <link>` to interactively select a download script with descriptions, with auto-fallthrough for `youtube.com/live` streams and (non-clip) `twitch.tv` streams/VODs to their respective downloaders.
 
 # Settings
 
@@ -15,26 +15,23 @@ Use `PS> dl.ps1 <link>` to interactively select a download script with descripti
   * `"./"`
   * `"C:/Users/User/Download/"`
 
-## Config.YTDLPOutputFormat, Config.YTARCHIVEOutputFormat
-* **[String]** File name format for scripts using yt-dlp or ytarchive
-* They both have different output format labels and can't share it between eachother. Recommended to keep them in sync
-* Ex
-  * (yt-dlp) `"%(uploader)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] f%(format_id)s.%(ext)s"`
-  * (ytarchive) `"%(channel)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] LIVE"`
+## Config.YTDLPOutputFormat
+* **[String]** File name format for yt-dlp
+* Ex `"%(uploader)s/%(upload_date)s - %(title)s/%(title)s [%(id)s] f%(format_id)s.%(ext)s"`
 
 ## Config.AlwaysUseCookiesFile
-* **[Bool: true|false]** Whether to "always" use a cookies file instead of "whenever possible"
-* This setting only affects scripts using yt-dlp, ytarchive cannot read cookies from the browser and will always use the cookies file
+* **[Bool: true|false]** Always use `Config.CookiesFilePath` as the cookie provider instead of the browser
 
 ## Config.CookiesFilePath
 * **[String]** Cookie file path.
-* At minimum required for ytarchive scripts when AlwaysUseCookiesFile = false, otherwise this is is always needed.
+* Needed when `Config.AlwaysUseCookiesFile` is true
 * Ex
   * `"C:/Users/User/cookies.txt"`
   * `"/mnt/W/ytdl/cookies.txt"`
 
 ## Config.CookiesBrowser
-* **[String: `brave` | `chrome` | `chromium` | `edge` | `firefox` | `opera` | `safari` | `vivaldi`]** Browser for yt-dlp to auto-extract cookies from when AlwaysUseCookiesFile = true
+* **[String: `chrome` | `firefox` | ...]** Browser for yt-dlp to auto-extract cookies from when AlwaysUseCookiesFile = true
+* See the [yt-dlp README#Filesystem Options](https://github.com/yt-dlp/yt-dlp/blob/master/README.md#filesystem-options) for supported browsers 
 
 ## Config.MediaConcurrentFragments, Config.DataConcurrentFragments
 **NOTE ABOUT CONCURRENT FRAGMENTS:**
