@@ -6,7 +6,7 @@ yt-dlp --cookies-from-browser $Config.CookiesBrowser --cookies $Config.CookiesFi
 sleep 1
 
 $CommandArgs = @(
-#    "--trace",
+    '--verbose',
     "--cookies", $Config.CookiesFilePath,
     "--add-metadata",
     "--no-merge",
@@ -15,11 +15,9 @@ $CommandArgs = @(
     "--wait",
     "--retry-stream", "60",
     "--threads", $Config.MediaConcurrentFragments,
-    "--output", "$($Config.OutputBase)/$($Config.YTARCHIVEOutputFormat)" # THIS COMMA IS PURPOSFULLY MISSING!!
-    $args,
-    "best"
+    "--output", "$($Config.OutputBase)/$($Config.YTARCHIVEOutputFormat)"
 )
 
-ytarchive @CommandArgs
+ytarchive @CommandArgs @args best
 
 Remove-Item $Config.CookiesFilePath
