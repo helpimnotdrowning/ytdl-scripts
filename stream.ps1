@@ -20,6 +20,7 @@ $Command = @(
 	'--embed-thumbnail',
 	'--skip-unavailable-fragments',
 	'--check-formats',
+	'--wait-for-video', '60-600',
 	'--concurrent-fragments', $Config.MediaConcurrentFragments,
 	'--sponsorblock-mark', 'all,-poi_highlight,-filler',
 	'--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)"
