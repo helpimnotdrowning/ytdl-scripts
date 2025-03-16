@@ -58,7 +58,7 @@ $Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
 # Auto-detect YouTube live stream
 #if ($args[0] -match "^(http(s)?:\/\/)?.*\.?youtube\.com\/live\/") {
 if ($URL -like "*youtube.com/live/*") {
-	./stream-unprocessed $URL @ExtraArgs
+	./stream $URL @ExtraArgs
 	exit
 }
 
