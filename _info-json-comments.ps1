@@ -1,14 +1,18 @@
 $Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
 
-$CookieConfig = $Config.AlwaysUseCookiesFile ? @('--cookies', $Config.CookiesFilePath) : @('--cookies-from-browser', $Config.CookiesBrowser)
+if ($Config.NoCookies) {
+	$CookieConfig = @('--no-cookies')
+} else {
+	$CookieConfig = $Config.AlwaysUseCookiesFile ? @('--cookies', $Config.CookiesFilePath) : @('--cookies-from-browser', $Config.CookiesBrowser)
+}
 
 $Command = @(
 	'--verbose',
     '--format', "b",
     '--force-ipv4',
-    '--sleep-requests', '.25',
-    '--sleep-interval', '5',
-    '--max-sleep-interval', '15',
+    '--sleep-requests', $Config.ArchiveDataSleep,
+    '--sleep-interval', $Config.ArchiveSleepMin,
+    '--max-sleep-interval', $Config.ArchiveSleepMax,
     '--ignore-errors',
     '--no-continue',
     '--no-overwrites',

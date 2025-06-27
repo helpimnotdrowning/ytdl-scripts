@@ -6,11 +6,16 @@
 	// README before modify these settings.
 	
 	"OutputBase": "/media/ytdl",
-	"YTDLPOutputFormat": "%(uploader)s/%(upload_date)s - %(title)s [%(id)s]/%(title)s [%(id)s] f%(format_id)s.%(ext)s",
+	"YTDLPOutputFormat": "%(uploader)s/%(upload_date)s - %(id)s - %(title)s/%(title)s [%(id)s] f%(format_id)s.%(ext)s",
 	
+	"NoCookies": false,
 	"AlwaysUseCookiesFile": false,
 	"CookiesFilePath": "/media/ytdl/cookies.txt",
 	"CookiesBrowser": "firefox",
+
+	"ArchiveSleepMin": 180,
+	"ArchiveSleepMax": 600,
+	"ArchiveDataSleep": 10,
 	
 	// Double-check README before changing these numbers!
 	"MediaConcurrentFragments": 5,
