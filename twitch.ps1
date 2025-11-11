@@ -10,7 +10,7 @@ $Command = @(
     '--verbose',
     '--format', 'bestvideo[vcodec^=avc]+bestaudio[acodec^=mp4a]/bestvideo+bestaudio/best'
     '--downloader', 'aria2c',
-    '--downloader-args', "--continue --max-concurrent-downloads=16 --max-connection-per-server=16 --split=16 --min-split-size=5M",
+    '--downloader-args', "--continue --max-concurrent-downloads=8 --max-connection-per-server=8 --split=8 --min-split-size=5M",
     '--force-ipv4',
     '--keep-video',
     '--ignore-errors',
@@ -19,7 +19,6 @@ $Command = @(
     '--add-metadata',
     '--write-description',
     '--write-info-json',
-    '--write-annotations',
     '--write-thumbnail',
     '--embed-thumbnail',
     '--all-subs',

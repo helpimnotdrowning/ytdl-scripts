@@ -18,8 +18,8 @@ function Read-HostNumberMenu {
     $000 = $PSStyle.Reset
     $GRY = $PSStyle.Foreground.BrightBlack
     
-    $Selection = 4
-    $Attempted = $false
+    [int] $Selection = $null
+    [bool] $Attempted = $false
     
     Write-Host "`n$Query`n"
     
@@ -76,7 +76,7 @@ if (($URL -like "*twitch.tv*") -and ($URL -notlike "*clips.twitch.tv/*")) {
 #}
 
 Write-Warning "URL: $URL"
-Write-Warning "EXTRA ARGS: @ExtraArgs"
+Write-Warning "EXTRA ARGS: $($ExtraArgs -join ' ')"
 
 
 # choice param is optional, if not used (-eq 0), interactively pick
@@ -126,11 +126,15 @@ if ($Choice -eq 0) {
 			"Music Videos",
 			"musicvideo",
 			"Special format for downloading YouTube music videos for my music collection"
+		),
+		@(
+			"Thumbnails",
+			"thumbnail",
+			"Just the thumbnail"
 		)
 	)
 	
-	#if ($args)
-	$Choice = Read-HostNumberMenu -Query "What would you like to do with link `"$URL`"?" -Options $Options
+	$Choice = Read-HostNumberMenu -Query "Actions for ``$URL```:" -Options $Options
 	
 }
 
@@ -144,5 +148,9 @@ switch ($Choice) {
 	7 { &"$PSScriptRoot/_subs-chat" $URL @ExtraArgs }
 	8 { &"$PSScriptRoot/_info-json-comments" $URL @ExtraArgs }
 	9 { &"$PSScriptRoot/musicvideo" $URL @ExtraArgs }
-	default {Write-Error "Invalid choice, must be within 1-9, wrote `"$Choice`""; exit}
+	10{ &"$PSScriptRoot/thumbnail" $URL @ExtraArgs }
+	default {
+		Write-Error "Choice must be within 1-10, was $Choice"
+		exit
+	}
 }
