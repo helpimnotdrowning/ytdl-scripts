@@ -19,7 +19,6 @@ $Command = @(
 	'--add-metadata',
 	'--write-description',
 	'--write-info-json',
-	'--write-annotations',
 	'--write-thumbnail',
 	'--embed-thumbnail',
 	'--all-subs',
