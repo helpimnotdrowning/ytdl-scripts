@@ -1,10 +1,4 @@
-$Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
-
-if ($Config.NoCookies) {
-	$CookieConfig = @('--no-cookies')
-} else {
-	$CookieConfig = $Config.AlwaysUseCookiesFile ? @('--cookies', $Config.CookiesFilePath) : @('--cookies-from-browser', $Config.CookiesBrowser)
-}
+$Config, $ExtraFlags = (& "$PSScriptRoot/__load-config.ps1" -ConfigFile "$PSScriptRoot/Config.json5")
 
 $Command = @(
 	'--verbose',
@@ -27,7 +21,7 @@ $Command = @(
 	'--check-formats',
 	'--concurrent-fragments', $Config.MediaConcurrentFragments,
 	'--sponsorblock-mark', 'all,-poi_highlight,-filler',
-	'--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)" # THIS COMMA IS PURPOSFULLY MISSING!!
+	'--output', "$($Config.OutputBase)/$($Config.YTDLPOutputFormat)"
 )
 
-yt-dlp @CookieConfig @Command @args *>&1
+yt-dlp @ExtraFlags @Command @args *>&1

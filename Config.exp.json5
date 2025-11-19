@@ -12,6 +12,7 @@
 	"AlwaysUseCookiesFile": false,
 	"CookiesFilePath": "/media/ytdl/cookies.txt",
 	"CookiesBrowser": "firefox",
+	"JsRuntime": "deno",
 
 	"ArchiveSleepMin": 180,
 	"ArchiveSleepMax": 600,

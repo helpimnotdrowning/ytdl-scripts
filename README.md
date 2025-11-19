@@ -36,6 +36,10 @@ Use `dl.ps1 <link>` to interactively select a download script with descriptions,
 * **[String: `chrome` | `firefox` | ...]** Browser for yt-dlp to auto-extract cookies from when `AlwaysUseCookiesFile` is false
 * See the [yt-dlp README#Filesystem Options](https://github.com/yt-dlp/yt-dlp/blob/master/README.md#filesystem-options) for supported browsers 
 
+## Config.JsRuntime
+* **[String: `deno` | `node` | `bun` | `quickjs` | `none`]** JS runtime for solving challenges
+* See the [yt-dlp wiki page](https://github.com/yt-dlp/yt-dlp/wiki/EJS#step-1-install-a-supported-javascript-runtime) for details
+
 ## Config.ArchiveSleepMin, ArchiveSleepMax, ArchiveDataSleep
 * **[Int]** `full` and its children scripts use a different sleep duration than other scripts. This helps prevent temp bans by YouTube (and probably other platforms) from mass downloads, like entire channels.
 

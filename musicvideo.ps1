@@ -1,10 +1,4 @@
-$Config = Get-Content -Raw "$PSScriptRoot/Config.json5" | ConvertFrom-Json
-
-if ($Config.NoCookies) {
-	$CookieConfig = @('--no-cookies')
-} else {
-	$CookieConfig = $Config.AlwaysUseCookiesFile ? @('--cookies', $Config.CookiesFilePath) : @('--cookies-from-browser', $Config.CookiesBrowser)
-}
+$Config, $ExtraFlags = (& "$PSScriptRoot/__load-config.ps1" -ConfigFile "$PSScriptRoot/Config.json5")
 
 $Command = @(
 	'--verbose',
@@ -33,4 +27,4 @@ $Command = @(
 	'--output', "$($Config.OutputBase)/musicvideo/[%(upload_date>%Y-%m-%d)s] [yt-%(id)s] %(title)s - %(uploader)s.%(ext)s"
 )
 
-yt-dlp @CookieConfig @Command @args *>&1
+yt-dlp @ExtraFlags @Command @args *>&1
